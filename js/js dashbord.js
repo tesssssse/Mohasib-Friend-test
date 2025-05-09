@@ -351,7 +351,7 @@ function initializeApp() {
 
           // Fetch access token using the authorization code
           const tokenResponse = await fetch(
-            "https://us-east-1_ASnAeUUfL.auth.us-east-1.amazoncognito.com/oauth2/token",
+            "https://us-east-1ASnAeUUfL.auth.us-east-1.amazoncognito.com/oauth2/token",
             {
               method: "POST",
               headers: {
@@ -372,7 +372,7 @@ function initializeApp() {
 
           // Fetch user information using the access token
           const userInfoResponse = await fetch(
-            "https://us-east-1_ASnAeUUfL.auth.us-east-1.amazoncognito.com/oauth2/userInfo",
+            "https://us-east-1ASnAeUUfL.auth.us-east-1.amazoncognito.com/oauth2/userInfo",
             {
               method: "POST",
               headers: {
