@@ -9,12 +9,12 @@ const CONFIG = {
     // New API endpoint for creating subscription data (may be redundant based on Lambda)
     notificationIconSelector: "#notificationicon",
     popupMessage: "يرجى إكمال ملفك الشخصي لاستخدام المنصة.",
-    userPoolId: "us-east-1_K6sySXFRZ",
-    clientId: "6fj5ma49n4cc1b033qiqsblc2v",
+    userPoolId: "us-east-1_ASnAeUUfL",
+    clientId: "1v5jdad42jojr28bcv13sgds5r",
   },
 };
 
-sessionStorage.setItem("userId","1644565")
+//sessionStorage.setItem("userId","1644565")
 
 
 /*sessionStorage.setItem("userId","55555")*/
@@ -324,7 +324,7 @@ function initializeApp() {
         initializeDashboard();
       } else {
         console.error("User ID is missing from sessionStorage. Redirecting to Sign-in page.");
-       /* window.location.href = "https://us-east-1fhfklvrxm.auth.us-east-1.amazoncognito.com/login/continue?client_id=6fj5ma49n4cc1b033qiqsblc2v&redirect_uri=https%3A%2F%2Fmohasibfriend.github.io%2FMohasib-Friend%2Fhome.html&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile";  
+       /* window.location.href = "https://us-east-1_ASnAeUUfL.auth.us-east-1.amazoncognito.com/login/continue?client_id=6fj5ma49n4cc1b033qiqsblc2v&redirect_uri=https%3A%2F%2Fmohasibfriend.github.io%2FMohasib-Friend%2Fhome.html&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile";  
        */
        } 
 
@@ -347,11 +347,11 @@ function initializeApp() {
       if (authCode) {
         try {
           const clientId = CONFIG.app.clientId;
-          const redirectUri = "https://mohasibfriend.github.io/Mohasib-Friend/home.html";
+          const redirectUri = "https://tesssssse.github.io/Mohasib-Friend-test/home.html";
 
           // Fetch access token using the authorization code
           const tokenResponse = await fetch(
-            "https://us-east-1fhfklvrxm.auth.us-east-1.amazoncognito.com/oauth2/token",
+            "https://us-east-1_ASnAeUUfL.auth.us-east-1.amazoncognito.com/oauth2/token",
             {
               method: "POST",
               headers: {
@@ -372,7 +372,7 @@ function initializeApp() {
 
           // Fetch user information using the access token
           const userInfoResponse = await fetch(
-            "https://us-east-1fhfklvrxm.auth.us-east-1.amazoncognito.com/oauth2/userInfo",
+            "https://us-east-1_ASnAeUUfL.auth.us-east-1.amazoncognito.com/oauth2/userInfo",
             {
               method: "POST",
               headers: {
@@ -1246,7 +1246,7 @@ if (logoutButton && logoutModal && confirmLogout && cancelLogout) {
   // عند النقر على زر "تسجيل خروج" في الكونتينر
   confirmLogout.addEventListener("click", function () {
     window.location.href =
-      "https://us-east-1fhfklvrxm.auth.us-east-1.amazoncognito.com/login?client_id=6fj5ma49n4cc1b033qiqsblc2v&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https%3A%2F%2Fmohasibfriend.github.io%2FMohasib-Friend%2Fhome.html"; 
+      "https://us-east-1_ASnAeUUfL.auth.us-east-1.amazoncognito.com/login?client_id=6fj5ma49n4cc1b033qiqsblc2v&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https%3A%2F%2Fmohasibfriend.github.io%2FMohasib-Friend%2Fhome.html"; 
   });
 
   // عند النقر على زر "إلغاء"، إخفاء الكونتينر
@@ -1267,7 +1267,7 @@ if (logoutButton && logoutModal && confirmLogout && cancelLogout) {
 
     // إعادة التوجيه إلى صفحة تسجيل الدخول بعد تسجيل الخروج
     window.location.href =
-      "https://us-east-1fhfklvrxm.auth.us-east-1.amazoncognito.com/login?client_id=6fj5ma49n4cc1b033qiqsblc2v&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https%3A%2F%2Fmohasibfriend.github.io%2FMohasib-Friend%2Fhome.html";
+      "https://us-east-1_ASnAeUUfL.auth.us-east-1.amazoncognito.com/login?client_id=6fj5ma49n4cc1b033qiqsblc2v&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https%3A%2F%2Fmohasibfriend.github.io%2FMohasib-Friend%2Fhome.html";
   }
 
   // ربط الدالة بزر تسجيل الخروج
@@ -1285,7 +1285,7 @@ if (logoutButton && logoutModal && confirmLogout && cancelLogout) {
       if (sessionStorage.getItem("logoutInitiated") === "true") {
         sessionStorage.removeItem("logoutInitiated");
         window.location.href =
-          "https://us-east-1fhfklvrxm.auth.us-east-1.amazoncognito.com/login?client_id=6fj5ma49n4cc1b033qiqsblc2v&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https%3A%2F%2Fmohasibfriend.github.io%2FMohasib-Friend%2Fhome.html";
+          "https://us-east-1_ASnAeUUfL.auth.us-east-1.amazoncognito.com/login?client_id=6fj5ma49n4cc1b033qiqsblc2v&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https%3A%2F%2Fmohasibfriend.github.io%2FMohasib-Friend%2Fhome.html";
       }
     }
   });
