@@ -69,7 +69,7 @@ function initializeApp() {
     function showSpinner() {
       $("#spinner").show();
     }
-    fetchRegistrationStatus();
+
     /**
      * Function to hide the spinner
      */
@@ -304,7 +304,7 @@ function initializeApp() {
         // Fetch notifications using the registration number
         const notifications = await fetchNotifications(registrationNumber);
         updateNotificationIcon(notifications);
-        fetchRegistrationStatus();
+
         // Update subscription UI based on status
         updateSubscriptionUI();
         
@@ -327,10 +327,9 @@ function initializeApp() {
         window.location.href = "https://us-east-1asnaeuufl.auth.us-east-1.amazoncognito.com/login/continue?client_id=1v5jdad42jojr28bcv13sgds5r&redirect_uri=https%3A%2F%2Ftesssssse.github.io%2FMohasib-Friend-test%2Fhome.html&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile";  
        
        } 
-
+      fetchRegistrationStatus();
       displayname();
       updateSubscriptionUI();
-      fetchRegistrationStatus();
       // Add event listener for the Subscribe button
       const subscribeButton = document.getElementById("subscribeButton");
       if (subscribeButton) {
