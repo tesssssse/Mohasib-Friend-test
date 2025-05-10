@@ -27,16 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
 const CONFIG = {
   app: {
     getRegistrationNumberApi:
-      "https://f8nvx3oaqa.execute-api.us-east-1.amazonaws.com/prod/mfur",
+      "https://cauntkqx43.execute-api.us-east-1.amazonaws.com/prod/mf_fetch_reg_num",
     getNotificationsApi:
-      "https://1rw7rjdqbc.execute-api.us-east-1.amazonaws.com/prod/mfn",
+      "https://cauntkqx43.execute-api.us-east-1.amazonaws.com/prod/mf_fetch_notification",
     /*userProfileScreenUrl: "https://mohasibfriend.github.io/Mohasib-Friend/index%20profile.html",*/
     notificationIconSelector: "#notificationicon",
     popupMessage: "Please complete your profile in order to use the platform.",
     loginScreenUrl:
-      "https://us-east-1fhfklvrxm.auth.us-east-1.amazoncognito.com/login?client_id=6fj5ma49n4cc1b033qiqsblc2v&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https%3A%2F%2Fmohasibfriend.github.io%2FMohasib-Friend%2Fhome.html",
-    userPoolId: "us-east-1_fhFkLvRxM", // Replace with your actual User Pool ID
-    clientId: "6fj5ma49n4cc1b033qiqsblc2v",
+      "https://us-east-1asnaeuufl.auth.us-east-1.amazoncognito.com/login/continue?client_id=1v5jdad42jojr28bcv13sgds5r&redirect_uri=https%3A%2F%2Ftesssssse.github.io%2FMohasib-Friend-test%2Fhome.html&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile",
+    userPoolId: "us-east-1_ASnAeUUfL",
+    clientId: "1v5jdad42jojr28bcv13sgds5r",
   },
 };
 
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Fetch client credentials and update table
-async function fetchClientCredentials() {
+/*async function fetchClientCredentials() {
   showSpinner();
   try {
     const registrationNumber = sessionStorage.getItem("registrationNumber"); // Replace with your dynamic value
@@ -127,7 +127,7 @@ async function fetchClientCredentials() {
     // إخفاء السبينر بعد انتهاء العملية سواء نجحت أم لا
     hideSpinner();
   }
-}
+}*/
 
 // التحقق من تحميل مكتبة AmazonCognitoIdentity، إذا لم تكن محملة، قم بتحميلها
 function loadCognitoSDK(callback) {
@@ -626,7 +626,7 @@ function signOutAndClearSession() {
 
   // إعادة التوجيه إلى صفحة تسجيل الدخول بعد تسجيل الخروج
   window.location.href =
-    "https://us-east-1fhfklvrxm.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=6fj5ma49n4cc1b033qiqsblc2v&redirect_uri=https://mohasibfriend.github.io/Mohasib-Friend/&scope=openid+profile+email"; // تعديل الرابط إلى صفحة تسجيل الدخول الخاصة بك
+    "https://us-east-1asnaeuufl.auth.us-east-1.amazoncognito.com/login/continue?client_id=1v5jdad42jojr28bcv13sgds5r&redirect_uri=https%3A%2F%2Ftesssssse.github.io%2FMohasib-Friend-test%2Fhome.html&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile"; // تعديل الرابط إلى صفحة تسجيل الدخول الخاصة بك
 }
 
 // ربط الدالة بزر تسجيل الخروج
@@ -648,7 +648,7 @@ window.addEventListener("pageshow", function (event) {
       // إذا كان sessionStorage فارغًا (المستخدم مسجل الخروج)، إعادة التوجيه إلى صفحة تسجيل الدخول
       sessionStorage.removeItem("logoutInitiated"); // إزالة القيمة بعد الاستخدام
       window.location.href =
-        "https://us-east-1fhfklvrxm.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=6fj5ma49n4cc1b033qiqsblc2v&redirect_uri=https://mohasibfriend.github.io/Mohasib-Friend/&scope=openid+profile+email";
+        "https://us-east-1asnaeuufl.auth.us-east-1.amazoncognito.com/login/continue?client_id=1v5jdad42jojr28bcv13sgds5r&redirect_uri=https%3A%2F%2Ftesssssse.github.io%2FMohasib-Friend-test%2Fhome.html&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile";
     }
   }
 });
