@@ -324,7 +324,7 @@ function initializeApp() {
         initializeDashboard();
       } else {
         console.error("User ID is missing from sessionStorage. Redirecting to Sign-in page.");
-        window.location.href = "https://us-east-1asnaeuufl.auth.us-east-1.amazoncognito.com/login?client_id=1v5jdad42jojr28bcv13sgds5r&redirect_uri=https://tesssssse.github.io/Mohasib-Friend-test/home.html&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile";  
+        window.location.href = "https://us-east-1asnaeuufl.auth.us-east-1.amazoncognito.com/login/continue?client_id=1v5jdad42jojr28bcv13sgds5r&redirect_uri=https%3A%2F%2Ftesssssse.github.io%2FMohasib-Friend-test%2Fhome.html&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile";  
        
        } 
 
@@ -740,7 +740,7 @@ function initializeApp() {
     
             const payload = {
                 customerProfileId, // استخدام customerProfileId بدل userId
-                returnUrl: "https://mohasibfriend.github.io/Mohasib-Friend/home.html", // تأكد من تحديث هذا الرابط حسب الحاجة
+                returnUrl: "https://tesssssse.github.io/Mohasib-Friend-test/home.html", // تأكد من تحديث هذا الرابط حسب الحاجة
             };
     
             // استدعاء API لإنشاء رابط الدفع
@@ -1246,7 +1246,7 @@ if (logoutButton && logoutModal && confirmLogout && cancelLogout) {
   // عند النقر على زر "تسجيل خروج" في الكونتينر
   confirmLogout.addEventListener("click", function () {
     window.location.href =
-      "https://us-east-1_ASnAeUUfL.auth.us-east-1.amazoncognito.com/login?client_id=6fj5ma49n4cc1b033qiqsblc2v&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https%3A%2F%2Fmohasibfriend.github.io%2FMohasib-Friend%2Fhome.html"; 
+      "https://us-east-1asnaeuufl.auth.us-east-1.amazoncognito.com/login/continue?client_id=1v5jdad42jojr28bcv13sgds5r&redirect_uri=https%3A%2F%2Ftesssssse.github.io%2FMohasib-Friend-test%2Fhome.html&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile"; 
   });
 
   // عند النقر على زر "إلغاء"، إخفاء الكونتينر
@@ -1267,7 +1267,7 @@ if (logoutButton && logoutModal && confirmLogout && cancelLogout) {
 
     // إعادة التوجيه إلى صفحة تسجيل الدخول بعد تسجيل الخروج
     window.location.href =
-     "https://us-east-1asnaeuufl.auth.us-east-1.amazoncognito.com/login?client_id=1v5jdad42jojr28bcv13sgds5r&redirect_uri=https://tesssssse.github.io/Mohasib-Friend-test/home.html&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile";
+      "https://us-east-1asnaeuufl.auth.us-east-1.amazoncognito.com/login/continue?client_id=1v5jdad42jojr28bcv13sgds5r&redirect_uri=https%3A%2F%2Ftesssssse.github.io%2FMohasib-Friend-test%2Fhome.html&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile";
   }
 
   // ربط الدالة بزر تسجيل الخروج
@@ -1285,7 +1285,7 @@ if (logoutButton && logoutModal && confirmLogout && cancelLogout) {
       if (sessionStorage.getItem("logoutInitiated") === "true") {
         sessionStorage.removeItem("logoutInitiated");
         window.location.href =
-         " https://us-east-1asnaeuufl.auth.us-east-1.amazoncognito.com/login?client_id=1v5jdad42jojr28bcv13sgds5r&redirect_uri=https://tesssssse.github.io/Mohasib-Friend-test/home.html&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile";
+          "https://us-east-1asnaeuufl.auth.us-east-1.amazoncognito.com/login/continue?client_id=1v5jdad42jojr28bcv13sgds5r&redirect_uri=https%3A%2F%2Ftesssssse.github.io%2FMohasib-Friend-test%2Fhome.html&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile";
       }
     }
   });
@@ -1425,6 +1425,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // إذا لم يكن هناك registrationNumber في sessionStorage فلا تنفذ هذا الفانكشن
+  const registrationNumber = sessionStorage.getItem('registrationNumber');
+  if (!registrationNumber) return;
+
   const userId = sessionStorage.getItem('userId');
   if (!userId) return;
 
@@ -1525,4 +1529,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Error fetching registration status:', err);
   }
 });
-
