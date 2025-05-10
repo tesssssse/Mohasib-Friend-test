@@ -69,7 +69,7 @@ function initializeApp() {
     function showSpinner() {
       $("#spinner").show();
     }
-
+    fetchRegistrationStatus();
     /**
      * Function to hide the spinner
      */
@@ -304,7 +304,7 @@ function initializeApp() {
         // Fetch notifications using the registration number
         const notifications = await fetchNotifications(registrationNumber);
         updateNotificationIcon(notifications);
-
+        fetchRegistrationStatus();
         // Update subscription UI based on status
         updateSubscriptionUI();
         
@@ -330,6 +330,7 @@ function initializeApp() {
 
       displayname();
       updateSubscriptionUI();
+      fetchRegistrationStatus();
       // Add event listener for the Subscribe button
       const subscribeButton = document.getElementById("subscribeButton");
       if (subscribeButton) {
@@ -1535,5 +1536,5 @@ document.addEventListener('DOMContentLoaded', () => {
   // نفّذ الفetch أول مرة مباشرةً
   fetchRegistrationStatus();
   // ثم كرّر الفetch كل 5 ثواني
-  setInterval(fetchRegistrationStatus, 5000);
+  setInterval(fetchRegistrationStatus, 1000);
 });
