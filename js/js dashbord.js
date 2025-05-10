@@ -1424,7 +1424,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
   // إذا لم يكن هناك registrationNumber في sessionStorage فلا تنفذ هذا الفانكشن
   const registrationNumber = sessionStorage.getItem('registrationNumber');
   if (!registrationNumber) return;
@@ -1432,100 +1432,108 @@ document.addEventListener('DOMContentLoaded', async () => {
   const userId = sessionStorage.getItem('userId');
   if (!userId) return;
 
-  try {
-    const res = await fetch(
-      'https://cauntkqx43.execute-api.us-east-1.amazonaws.com/prod/mf_fetch_file_statse',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId })
-      }
-    );
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    
-    const result = await res.json();
-    const payload = typeof result.body === 'string'
-      ? JSON.parse(result.body)
-      : result;
-      
-    const status = payload.statuse === true || payload.statuse === 'true';
-    sessionStorage.setItem('registrationStatus', status.toString());
+  // دالة لجلب الحالة من الـ API وإظهار الأوفرفلاي عند الحاجة
+  async function fetchRegistrationStatus() {
+    try {
+      const res = await fetch(
+        'https://cauntkqx43.execute-api.us-east-1.amazonaws.com/prod/mf_fetch_file_statse',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId })
+        }
+      );
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-    if (!status) {
-      const navBar = document.getElementById('NavBar');
-      navBar.style.position = 'relative';
+      const result = await res.json();
+      const payload = typeof result.body === 'string'
+        ? JSON.parse(result.body)
+        : result;
 
-      const style = document.createElement('style');
-      style.textContent = `
-        #processing-overlay {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          text-align: center;
-          z-index: 100;
-        }
-        #processing-overlay .clock {
-          width: 30px;
-          height: 30px;
-          border: 3px solid #fff;
-          border-radius: 50%;
-          position: relative;
-          margin: 0 auto;
-        }
-        #processing-overlay .clock::before,
-        #processing-overlay .clock::after {
-          content: '';
-          position: absolute;
-          background: #fff;
-          left: 50%;
-          top: 50%;
-          transform-origin: bottom center;
-        }
-        #processing-overlay .clock::before {
-          width: 2px;
-          height: 8px;
-          transform: translateX(-50%) translateY(-100%) rotate(0deg);
-          animation: hour-hand 12s linear infinite;
-        }
-        #processing-overlay .clock::after {
-          width: 2px;
-          height: 12px;
-          transform: translateX(-50%) translateY(-100%) rotate(0deg);
-          animation: minute-hand 3s linear infinite;
-        }
-        @keyframes hour-hand {
-          from { transform: translateX(-50%) translateY(-100%) rotate(0deg); }
-          to { transform: translateX(-50%) translateY(-100%) rotate(360deg); }
-        }
-        @keyframes minute-hand {
-          from { transform: translateX(-50%) translateY(-100%) rotate(0deg); }
-          to { transform: translateX(-50%) translateY(-100%) rotate(360deg); }
-        }
-        #processing-overlay .processing-text {
-          margin-top: 8px;
-          font-size: 15px;
-          color: #fff;
-          font-weight: bold;
-        }
-        @media only screen and  (max-width: 875px) {
+      const status = payload.statuse === true || payload.statuse === 'true';
+      sessionStorage.setItem('registrationStatus', status.toString());
+
+      // إذا كانت الحالة false، نعرض الأوفرفلاي
+      if (!status && !document.getElementById('processing-overlay')) {
+        const navBar = document.getElementById('NavBar');
+        navBar.style.position = 'relative';
+
+        const style = document.createElement('style');
+        style.textContent = `
           #processing-overlay {
-            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 100;
           }
-        }
-      `;
-      document.head.appendChild(style);
+          #processing-overlay .clock {
+            width: 30px;
+            height: 30px;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto;
+          }
+          #processing-overlay .clock::before,
+          #processing-overlay .clock::after {
+            content: '';
+            position: absolute;
+            background: #fff;
+            left: 50%;
+            top: 50%;
+            transform-origin: bottom center;
+          }
+          #processing-overlay .clock::before {
+            width: 2px;
+            height: 8px;
+            transform: translateX(-50%) translateY(-100%) rotate(0deg);
+            animation: hour-hand 12s linear infinite;
+          }
+          #processing-overlay .clock::after {
+            width: 2px;
+            height: 12px;
+            transform: translateX(-50%) translateY(-100%) rotate(0deg);
+            animation: minute-hand 3s linear infinite;
+          }
+          @keyframes hour-hand {
+            from { transform: translateX(-50%) translateY(-100%) rotate(0deg); }
+            to { transform: translateX(-50%) translateY(-100%) rotate(360deg); }
+          }
+          @keyframes minute-hand {
+            from { transform: translateX(-50%) translateY(-100%) rotate(0deg); }
+            to { transform: translateX(-50%) translateY(-100%) rotate(360deg); }
+          }
+          #processing-overlay .processing-text {
+            margin-top: 8px;
+            font-size: 15px;
+            color: #fff;
+            font-weight: bold;
+          }
+          @media only screen and (max-width: 875px) {
+            #processing-overlay {
+              display: none;
+            }
+          }
+        `;
+        document.head.appendChild(style);
 
-      const overlay = document.createElement('div');
-      overlay.id = 'processing-overlay';
-      overlay.innerHTML = `
-        <div class="clock"></div>
-        <div class="processing-text">يرجى انتظار ليكتمل معالجة الملفات</div>
-      `;
-      navBar.appendChild(overlay);
+        const overlay = document.createElement('div');
+        overlay.id = 'processing-overlay';
+        overlay.innerHTML = `
+          <div class="clock"></div>
+          <div class="processing-text">يرجى انتظار ليكتمل معالجة الملفات</div>
+        `;
+        navBar.appendChild(overlay);
+      }
+    } catch (err) {
+      console.error('Error fetching registration status:', err);
     }
-
-  } catch (err) {
-    console.error('Error fetching registration status:', err);
   }
+
+  // نفّذ الفetch أول مرة مباشرةً
+  fetchRegistrationStatus();
+  // ثم كرّر الفetch كل 5 ثواني
+  setInterval(fetchRegistrationStatus, 5000);
 });
