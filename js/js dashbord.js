@@ -1430,7 +1430,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     const res = await fetch(
-      'https://w40sj75lb0.execute-api.us-east-1.amazonaws.com/prod/mf_fun_filestatuse',
+      'https://cauntkqx43.execute-api.us-east-1.amazonaws.com/prod/mf_fetch_file_statse',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
