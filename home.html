@@ -110,43 +110,33 @@
         </div>
     </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const portalLink = document.getElementById("profile");
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const portalLink = document.getElementById("profile");
 
-    // دالة لفحص الـ sessionStorage وتحديث الرابط/الحالة
-    function checkSession() {
-      const userId = sessionStorage.getItem("userId");
-      const regNum = sessionStorage.getItem("registrationNumber");
+            function checkRegistration() {
+            const userId = sessionStorage.getItem("userId");
+            const regNum = sessionStorage.getItem("registrationNumber");
 
-      // تحديث الـ href إذا كان userId موجود
-      if (userId) {
-        portalLink.href = `https://60157458-015d-4584-b137-8d775ad166dc-00-306z3cr5wcg74.worf.replit.dev/?userId=${encodeURIComponent(userId)}`;
-      }
+            if (userId) {
+                portalLink.href = `https://60157458-015d-4584-b137-8d775ad166dc-00-306z3cr5wcg74.worf.replit.dev/?userId=${encodeURIComponent(userId)}`;
+            }
 
-      // إذا كان رقم التسجيل موجود، نُعطّل الرابط ونُغيّر الشكل
-      if (regNum) {
-        portalLink.style.pointerEvents = "none";  
-        portalLink.style.backgroundColor = "#797575";
-        portalLink.style.color = "#fff";
-        portalLink.textContent = 'بالطبع انت مسجل';
-        portalLink.style.cursor = "not-allowed";
-      } else {
-        // إذا اختفى رقم التسجيل، نُعيد الرابط إلى الحالة الافتراضية
-        portalLink.style.pointerEvents = "";
-        portalLink.style.backgroundColor = "";
-        portalLink.style.color = "";
-        portalLink.textContent = 'اذهب إلى البوابة';
-        portalLink.style.cursor = "";
-      }
-    }
+            if (regNum) {
+                portalLink.style.pointerEvents = "none";        // يعطل الضغط
+                portalLink.style.backgroundColor = "#797575";   // لون رمادي
+                portalLink.style.color = "#fff";                // لون الخط أغمق
+                portalLink.textContent = 'بالطبع انت مسجل';
+                portalLink.style.cursor = "not-allowed";        // شكل الماوس
+            }
+            }
 
-    // نفّذ الفحص مرة عند التحميل...
-    checkSession();
-    // ...ثم كل ثانية
-    setInterval(checkSession, 1000);
-  });
-</script>
+            // أول فحص عند التحميل
+            checkRegistration();
+            // فحص كل ثانية
+            setInterval(checkRegistration, 1000);
+        });
+        </script>
 
     
 
